@@ -1,5 +1,4 @@
 <?php
-
 //限流实现
 interface RateLimiter
 {
@@ -52,7 +51,7 @@ class FixedWindowRateLimiterAlg implements RateLimiter
     }
 }
 
-
+//redis实例
 class RedisImpl
 {
     public function initRedis()
@@ -112,18 +111,6 @@ class SlidingWindowRateLimiterAlg implements RateLimiter
 
         $this->redis->zincrby($this->key, 1, $lastBlockTime);
         return true;
-    }
-}
-
-
-class RedisImpl
-{
-    public function initRedis()
-    {
-        $redis = new Redis();
-        $redis->connect('127.0.0.1', 6379);
-
-        return $redis;
     }
 }
 
